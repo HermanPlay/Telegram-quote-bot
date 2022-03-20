@@ -3,6 +3,40 @@ from PIL import ImageDraw
 from PIL import ImageFont
 
 
+def check_length(text, screen):  # First argument is string. Second is draw object, on which we put text
+    global font  # Will be resolved if done in OOP
+    global side_length  # Will be resolved if done in OOP
+    size = screen.textsize(text, font)
+    if size[0] > side_length - 15:
+        return False
+    return True
+
+def split_text_in_rows(text, screen):  # Takes one long string for one page
+
+    copy_text = ''
+    final_row = ''
+    rows = []
+
+    text_list = text.split(' ')
+
+    for i in text_list:
+        copy_text += (i + ' ') 
+        if check_length(copy_text, screen):
+            final_row += (i + ' ')
+        else:
+            rows.append(final_row)
+            copy_text = i + ' '
+            final_row = i + ' '
+
+    if final_row:
+        rows.append(final_row)
+
+    text = '\n'.join(rows)        
+    return text  # Returns string for one photo
+
+
+
+
 size = 500
 text_color = (0, 0, 0)
 bg_color = (255, 251, 247)
@@ -11,45 +45,7 @@ font_arial = ImageFont.truetype('arial.ttf', 14)
 
 text = '''Якщо потребуєте тимчасового розміщення, харчування слід звертатися до приймальних пунктів, які знаходяться у прикордонній зоні та у містах Польщі. Вони розташовані на всіх пунктах перетину українсько-польського кордону та вокзалах (dworzec). Як правило, інформаційні афіші про такі пункти виконані на тлі кольорів українського прапора і його назва зазначена українською та польською мовами. У таких пунктах Вас можуть направити до Центрів з прийняття українців у потребі, де Вам нададуть можливість перепочити, їжу, можливість заночувати у теплому місці (на добу або більший строк). Їх перелік знаходиться тут https://www.gov.pl/web/ua/-2. Звертаємо увагу, що цей перелік не є вичерпний. ЇХ може бути більше за рахунок пунктів відкритих владою міст. Про них Ви можете дізнатися на офіційному сайті такого міста (як правило, сайт міста виглядає так: «назва міста».pl).'''
 
-temp = ''
-result = ''
-temp_result = []
-bool_variable = False
-for index, char in enumerate(text):
 
-    if index % 758 != 0 or index == 0:
-
-        if bool_variable:
-
-            bool_variable = False
-            continue
-
-        elif index % 67 == 0 and index != 0:
-
-            result += temp
-
-            if text[index+1] == ' ':
-                print(text[index+1])
-
-                bool_variable = True
-
-            result += '\n'
-            temp = '' + char
-
-        else:
-
-            temp += char
-        
-        if index == len(text) - 1:
-            result += temp
-            temp_result.append(result)
-
-    else:
-        temp_result.append(result)
-        result = ''
-        temp = ''
-
-text = result
 
 new = Image.new('RGB',(size, size),color=bg_color)
 
