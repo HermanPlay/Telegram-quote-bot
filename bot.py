@@ -6,7 +6,7 @@ from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler
 from telegram.ext import Filters
 
-import main
+import imaging
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -27,7 +27,7 @@ def help(update, context):
 def echo(update, context):
     
     text_for_image = update.message.text
-    main.draw_image(text_for_image)
+    imaging.draw_image(text_for_image)
 
 
 def error(update, context):
