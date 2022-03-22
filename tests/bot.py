@@ -1,45 +1,60 @@
-text = '''1 linijka zawiera w sobie rozne slowa ktore nie mozna rozdzielic ok 2 linijka zawiera w sobie rozne slowa ktore nie mozna rozdzielic ok 3 linijka zawiera w sobie rozne slowa ktore nie mozna rozdzielic ok 4 linijka zawiera w sobie rozne slowa ktore nie mozna rozdzielic ok 5 linijka zawiera w sobie rozne slowa ktore nie mozna rozdzielic ok 6 linijka zawiera w sobie rozne slowa ktore nie mozna rozdzielic ok 7 linijka zawiera w sobie rozne slowa ktore nie mozna rozdzielic ok 8 linijka zawiera w sobie rozne slowa ktore nie mozna rozdzielic ok 9 linijka zawiera w sobie rozne slowa ktore nie mozna rozdzielic ok 10 linijka zawiera w sobie rozne slowa ktore nie mozna rozdzielic ok 11 linijka zawiera w sobie rozne slowa ktore nie mozna rozdzielic ok ostatnia linijka ma.
-'''
+import logging
 
-temp = ''
-result = ''
-temp_result = []
-bool_variable = False
-line_counter = 0
-for index, char in enumerate(text):
+from telegram.ext import Updater
+from telegram.ext import CommandHandler
+from telegram.ext import MessageHandler
+from telegram.ext import Filters
 
-    if index % 758 != 0 or index == 0:
+# Enable logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    level=logging.INFO)
 
-        if bool_variable:
+logger = logging.getLogger(__name__)
 
-            bool_variable = False
-            continue
 
-        elif index % 67 == 0 and index != 0:
+def start(update, context):
+    
+    update.message.reply_text('Hi!')
 
-            result += temp
-            line_counter += 1
 
-            if text[index+1] == ' ':
-                print(text[index+1])
+def help(update, context):
+    
+    update.message.reply_text('Help!')
 
-                bool_variable = True
 
-            result += '\n'
-            temp = '' + char
+def echo(update, context):
+    """Echo the user message."""
+    update.message.reply_text(update.message.text)
 
-        else:
 
-            temp += char
-        
-        if index == len(text) - 1:
-            result += temp
-            temp_result.append(result)
+def error(update, context):
+    """Log Errors caused by Updates."""
+    logger.warning('Update "%s" caused error "%s"', update, context.error)
 
-    else:
 
-        temp_result.append(result)
-        result = ''
-        temp = ''
+def main():
 
-print(temp_result)
+    updater = Updater("5210758989:AAEhTnu8t5YrUB45zIJwDzngwesFsjwC4jc", use_context=True)
+
+    dp = updater.dispatcher
+
+    dp.add_handler(CommandHandler("start", start))
+    dp.add_handler(CommandHandler("help", help))
+
+    # on noncommand i.e message - echo the message on Telegram
+    dp.add_handler(MessageHandler(Filters.text, echo))
+
+    # log all errors
+    dp.add_error_handler(error)
+
+    # Start the Bot
+    updater.start_polling()
+
+    # Run the bot until you press Ctrl-C or the process receives SIGINT,
+    # SIGTERM or SIGABRT. This should be used most of the time, since
+    # start_polling() is non-blocking and will stop the bot gracefully.
+    updater.idle()
+
+
+if __name__ == '__main__':
+    main()

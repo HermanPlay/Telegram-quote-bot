@@ -23,27 +23,30 @@ new = Image.new('RGB',(side_length, side_length),color=bg_color)
 
 draw = ImageDraw.Draw(new)
 
-text = 'Zdanie wielokortnie zlozone zawiera w sobie wiele roznych slow w tym tez slog g g g g g g g g g g g gg g g gg g g  g wa mi nie znane. Ja kocham kingusie najbardziej na swiecei i nic nie zmieni mojego zdania nigdy.'
-copy_text = ''
-final_row = ''
-rows = []
+def split_text_in_rows(text):  # Takes one long string for one page
 
-text_list = text.split(' ')
+    copy_text = ''
+    final_row = ''
+    rows = []
 
-for i in text_list:
-    copy_text += (i + ' ') 
-    if check_length(copy_text, draw):
-        final_row += (i + ' ')
-    else:
+    text_list = text.split(' ')
+
+    for i in text_list:
+        copy_text += (i + ' ') 
+        if check_length(copy_text, draw):
+            final_row += (i + ' ')
+        else:
+            rows.append(final_row)
+            copy_text = i + ' '
+            final_row = i + ' '
+
+    if final_row:
         rows.append(final_row)
-        copy_text = i + ' '
-        final_row = i + ' '
 
-if final_row:
-    rows.append(final_row)
+    text = '\n'.join(rows)        
+    return text  # Returns string for one photo
 
-text = '\n'.join(rows)        
-
+text = 'Zdanie wielokortnie zlozone zawiera w sobie wiele roznych slow w tym tez slog g g g g g g g g g g g gg g g gg g g  g wa mi nie znane. Ja kocham kingusie najbardziej na swiecei i nic nie zmieni mojego zdania nigdy.'
 draw.multiline_text((10,10), text, fill=text_color, font=font)
 new.show()
 # for index, row in enumerate(text_rows):
