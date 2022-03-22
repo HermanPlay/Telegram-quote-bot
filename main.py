@@ -34,24 +34,17 @@ def split_text_in_rows(text, screen):  # Takes one long string for one page
     text = '\n'.join(rows)        
     return text  # Returns string for one photo
 
-
-
-
-size = 500
+side_length = 500
 text_color = (0, 0, 0)
 bg_color = (255, 251, 247)
+font = ImageFont.truetype('arial.ttf', 14)
 
-font_arial = ImageFont.truetype('arial.ttf', 14)
+def draw_image(text):
+    
+    new = Image.new('RGB',(side_length, side_length),color=bg_color)
 
-text = '''Якщо потребуєте тимчасового розміщення, харчування слід звертатися до приймальних пунктів, які знаходяться у прикордонній зоні та у містах Польщі. Вони розташовані на всіх пунктах перетину українсько-польського кордону та вокзалах (dworzec). Як правило, інформаційні афіші про такі пункти виконані на тлі кольорів українського прапора і його назва зазначена українською та польською мовами. У таких пунктах Вас можуть направити до Центрів з прийняття українців у потребі, де Вам нададуть можливість перепочити, їжу, можливість заночувати у теплому місці (на добу або більший строк). Їх перелік знаходиться тут https://www.gov.pl/web/ua/-2. Звертаємо увагу, що цей перелік не є вичерпний. ЇХ може бути більше за рахунок пунктів відкритих владою міст. Про них Ви можете дізнатися на офіційному сайті такого міста (як правило, сайт міста виглядає так: «назва міста».pl).'''
+    d = ImageDraw.Draw(new)
 
+    d.multiline_text((10,10), split_text_in_rows(text, d), fill=text_color, font=font)
 
-
-new = Image.new('RGB',(size, size),color=bg_color)
-
-d = ImageDraw.Draw(new)
-for index, row in enumerate(temp_result):
-
-    d.text((10,209*index+10), ''.join(row), fill=text_color, font=font_arial, spacing=6)
-
-new.show()
+    new.show()

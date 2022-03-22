@@ -1,9 +1,12 @@
+from cgitb import text
 import logging
 
 from telegram.ext import Updater
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler
 from telegram.ext import Filters
+
+import main
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -14,8 +17,7 @@ logger = logging.getLogger(__name__)
 
 def start(update, context):
     
-    update.message.reply_text('Hi!')
-
+    update.message.reply_text('Hi! Send me text, which has to be put on the image')
 
 def help(update, context):
     
@@ -23,8 +25,9 @@ def help(update, context):
 
 
 def echo(update, context):
-    """Echo the user message."""
-    update.message.reply_text(update.message.text)
+    
+    text_for_image = update.message.text
+    main.draw_image(text_for_image)
 
 
 def error(update, context):
