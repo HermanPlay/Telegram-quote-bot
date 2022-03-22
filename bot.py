@@ -1,4 +1,4 @@
-from cgitb import text
+import os
 import logging
 
 from telegram.ext import Updater
@@ -14,6 +14,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
+ROOT = os.path.dirname(__file__)
 
 def start(update, context):
     
@@ -23,12 +24,12 @@ def help(update, context):
     
     update.message.reply_text('Help!')
 
-
 def echo(update, context):
     
     text_for_image = update.message.text
     imaging.draw_image(text_for_image)
-
+    chaid = update.message.chat_id
+    
 
 def error(update, context):
     """Log Errors caused by Updates."""

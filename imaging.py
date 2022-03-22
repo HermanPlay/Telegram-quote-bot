@@ -1,6 +1,8 @@
+from logging import root
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
+import os
 
 
 def check_length(text, screen):  # First argument is string. Second is draw object, on which we put text
@@ -38,6 +40,7 @@ side_length = 500
 text_color = (0, 0, 0)
 bg_color = (255, 251, 247)
 font = ImageFont.truetype('arial.ttf', 14)
+ROOT = os.path.dirname(__file__)
 
 def draw_image(text):
     
@@ -47,4 +50,4 @@ def draw_image(text):
 
     d.multiline_text((10,10), split_text_in_rows(text, d), fill=text_color, font=font)
 
-    new.show()
+    new.save(ROOT + '//' + '1.jpg')
