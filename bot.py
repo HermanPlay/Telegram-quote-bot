@@ -1,5 +1,6 @@
 import os
 import logging
+import telegram
 
 from telegram.ext import Updater
 from telegram.ext import CommandHandler
@@ -25,11 +26,11 @@ def help(update, context):
     update.message.reply_text('Help!')
 
 def echo(update, context):
-    
+    bot = telegram.Bot(token="5210758989:AAEhTnu8t5YrUB45zIJwDzngwesFsjwC4jc")
     text_for_image = update.message.text
     imaging.draw_image(text_for_image)
-    chaid = update.message.chat_id
-    
+    chatid = update.message.chat_id
+    bot.send_photo(chat_id=chatid, photo=open('Telegram-quote-bot//1.jpg', 'rb'))
 
 def error(update, context):
     """Log Errors caused by Updates."""
