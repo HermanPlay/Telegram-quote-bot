@@ -16,6 +16,8 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 PORT = int(os.environ.get('PORT', 5000))
 ROOT = os.path.dirname(__file__)
+TOKEN = "5210758989:AAEhTnu8t5YrUB45zIJwDzngwesFsjwC4jc"
+
 
 def start(update, context):
     
@@ -38,8 +40,6 @@ def error(update, context):
 
 
 def main():
-
-    TOKEN = "5210758989:AAEhTnu8t5YrUB45zIJwDzngwesFsjwC4jc"
 
     updater = Updater("5210758989:AAEhTnu8t5YrUB45zIJwDzngwesFsjwC4jc", use_context=True)
 
