@@ -28,7 +28,7 @@ def help(update, context):
     update.message.reply_text('Help!')
 
 def echo(update, context):
-    bot = telegram.Bot(token="5210758989:AAEhTnu8t5YrUB45zIJwDzngwesFsjwC4jc")
+    bot = telegram.Bot(token=TOKEN)
     text_for_image = update.message.text
     imaging.draw_image(text_for_image)
     chatid = update.message.chat_id
@@ -41,7 +41,7 @@ def error(update, context):
 
 def main():
 
-    updater = Updater("5210758989:AAEhTnu8t5YrUB45zIJwDzngwesFsjwC4jc", use_context=True)
+    updater = Updater(TOKEN, use_context=True)
 
     dp = updater.dispatcher
 
@@ -58,7 +58,7 @@ def main():
     updater.start_webhook(listen="0.0.0.0",
                           port=int(PORT),
                           url_path=TOKEN)
-    updater.bot.setWebhook('https://kindgaulek-bot.herokuapp.com/' + TOKEN)
+    updater.bot.setWebhook("https://kindgaulek-bot.herokuapp.com/" + TOKEN)
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since

@@ -1,1 +1,1 @@
-web: python3 bot.py:app --log-file 
+web: python3 bot.py
