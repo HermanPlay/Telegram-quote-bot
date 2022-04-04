@@ -7,7 +7,7 @@ from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler
 from telegram.ext import Filters
 
-import imaging
+#import imaging
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -30,7 +30,7 @@ def help(update, context):
 def echo(update, context):
     bot = telegram.Bot(token=TOKEN)
     text_for_image = update.message.text
-    imaging.draw_image(text_for_image)
+    #imaging.draw_image(text_for_image)
     chatid = update.message.chat_id
     bot.send_photo(chat_id=chatid, photo=open('Telegram-quote-bot//1.jpg', 'rb'))
 
