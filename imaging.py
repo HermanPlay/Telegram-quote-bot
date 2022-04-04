@@ -39,8 +39,8 @@ def split_text_in_rows(text, screen):  # Takes one long string for one page
 side_length = 500
 text_color = (0, 0, 0)
 bg_color = (255, 251, 247)
-font = ImageFont.truetype('arial.ttf', 14)
 ROOT = os.path.dirname(__file__)
+font = ImageFont.truetype(ROOT + '//arial.ttf', 14)
 
 def draw_image(text):
     
