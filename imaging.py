@@ -41,7 +41,7 @@ side_length = 500
 text_color = (0, 0, 0)
 bg_color = (255, 251, 247)
 ROOT = os.path.dirname(__file__)
-font = ImageFont.truetype(ROOT + '//arial.ttf', 14)
+font = ImageFont.truetype(ROOT + 'assets//fonts//arial.ttf', 14)
 
 def draw_image(text):
     
