@@ -1,5 +1,3 @@
-from copy import copy
-from typing import final
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
@@ -49,8 +47,3 @@ def split_text_in_rows(text):  # Takes one long string for one page
 text = 'Zdanie wielokortnie zlozone zawiera w sobie wiele roznych slow w tym tez slog g g g g g g g g g g g gg g g gg g g  g wa mi nie znane. Ja kocham kingusie najbardziej na swiecei i nic nie zmieni mojego zdania nigdy.'
 draw.multiline_text((10,10), text, fill=text_color, font=font)
 new.show()
-# for index, row in enumerate(text_rows):
-
-#     d.text((10,10*index+10), ''.join(row), fill=text_color, font=font_arial, spacing=6)
-
-# new.show()

@@ -51,7 +51,10 @@ def draw_image(text):
 
     d.multiline_text((10,10), split_text_in_rows(text, d), fill=text_color, font=font)
 
-    img_byte_arr = io.BytesIO()
-    new_image.save(img_byte_arr, format='PNG')
-    img_byte_arr = img_byte_arr.getvalue()
-    return img_byte_arr
+    buf = io.BytesIO()
+    new_image.save(buf, format='JPEG')
+    byte_image = buf.getvalue()
+
+    return byte_image
+
+
