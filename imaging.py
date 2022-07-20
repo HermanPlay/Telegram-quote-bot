@@ -2,6 +2,7 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 import os
+import io
 
 
 def check_length(text, screen):  # First argument is string. Second is draw object, on which we put text
@@ -39,14 +40,20 @@ side_length = 500
 text_color = (0, 0, 0)
 bg_color = (255, 251, 247)
 ROOT = os.path.dirname(__file__)
-font = ImageFont.truetype(ROOT + '//arial.ttf', 14)
+font = ImageFont.truetype(ROOT + 'assets//fonts//arial.ttf', 14)
 
 def draw_image(text):
     
-    new = Image.new('RGB',(side_length, side_length),color=bg_color)
+    new_image = Image.new('RGB',(side_length, side_length),color=bg_color)
 
-    d = ImageDraw.Draw(new)
+    d = ImageDraw.Draw(new_image)
 
     d.multiline_text((10,10), split_text_in_rows(text, d), fill=text_color, font=font)
 
-    new.save(ROOT + '//' + '1.jpg')
+    buf = io.BytesIO()
+    new_image.save(buf, format='JPEG')
+    byte_image = buf.getvalue()
+
+    return byte_image
+
+

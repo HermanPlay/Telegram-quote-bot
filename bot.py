@@ -8,8 +8,7 @@ from telegram.ext import Updater
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler
 from telegram.ext import Filters
-
-#import imaging
+import imaging
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -45,9 +44,9 @@ def help_f(update, context):
 def echo(update, context):
     bot = telegram.Bot(token=TOKEN)
     text_for_image = update.message.text
-    imaging.draw_image(text_for_image)
+    image = imaging.draw_image(text_for_image)
     chatid = update.message.chat_id
-    bot.send_photo(chat_id=chatid, photo=open('1.jpg', 'rb'))
+    bot.send_photo(chat_id=chatid, photo=image)
 
 def error(update, context):
     """Log Errors caused by Updates."""
@@ -82,7 +81,11 @@ def main():
 
     # Start the Bot
     updater.start_polling()
-    #updater.start_webhook(listen="0.0.0.0",port=int(PORT),url_path=TOKEN,webhook_url="https://kindgaulek-bot.herokuapp.com/" + TOKEN)
+
+    # updater.start_webhook(listen="0.0.0.0",
+    #                       port=int(PORT),
+    #                       url_path=TOKEN,
+    #                       webhook_url="https://kindgaulek-bot.herokuapp.com/" + TOKEN)
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
